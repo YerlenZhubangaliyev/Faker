@@ -25,53 +25,53 @@ class Person extends \Faker\Provider\Person
     /**
      * @var array
      */
-    public static $firstSequenceBitWeights = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+    public static $firstSequenceBitWeights = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
     /**
      * @var array
      */
-    public static $secondSequenceBitWeights = array(3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 2);
+    public static $secondSequenceBitWeights = [3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 2];
 
     /**
      * @var array
      */
-    public static $genderCenturyMap = array(
-        self::GENDER_MALE   => array(
+    public static $genderCenturyMap = [
+        self::GENDER_MALE   => [
             self::CENTURY_19TH => self::MALE_CENTURY_19TH,
             self::CENTURY_20TH => self::MALE_CENTURY_20TH,
             self::CENTURY_21ST => self::MALE_CENTURY_21ST,
-        ),
-        self::GENDER_FEMALE => array(
+        ],
+        self::GENDER_FEMALE => [
             self::CENTURY_19TH => self::FEMALE_CENTURY_19TH,
             self::CENTURY_20TH => self::FEMALE_CENTURY_20TH,
             self::CENTURY_21ST => self::FEMALE_CENTURY_21ST,
-        ),
-    );
+        ],
+    ];
 
     /**
      * @see https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D0%BA%D0%B0%D1%8F_%D1%84%D0%B0%D0%BC%D0%B8%D0%BB%D0%B8%D1%8F
      *
      * @var array
      */
-    protected static $maleNameFormats = array(
+    protected static $maleNameFormats = [
         '{{lastName}}ұлы {{firstNameMale}}',
-    );
+    ];
 
     /**
      * @see https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D0%BA%D0%B0%D1%8F_%D1%84%D0%B0%D0%BC%D0%B8%D0%BB%D0%B8%D1%8F
      *
      * @var array
      */
-    protected static $femaleNameFormats = array(
+    protected static $femaleNameFormats = [
         '{{lastName}}қызы {{firstNameFemale}}',
-    );
+    ];
 
     /**
      * @see http://koshpendi.kz/index.php/nomad/imena/
      *
      * @var array
      */
-    protected static $firstNameMale = array(
+    protected static $firstNameMale = [
         'Аылғазы',
         'Әбдіқадыр',
         'Бабағожа',
@@ -100,14 +100,14 @@ class Person extends \Faker\Provider\Person
         'Шаттық',
         'Ыстамбақы',
         'Ібни',
-    );
+    ];
 
     /**
      * @see http://koshpendi.kz/index.php/nomad/imena/
      *
      * @var array
      */
-    protected static $firstNameFemale = array(
+    protected static $firstNameFemale = [
         'Асылтас',
         'Әужа',
         'Бүлдіршін',
@@ -137,7 +137,7 @@ class Person extends \Faker\Provider\Person
         'Шырынгүл',
         'Ырысты',
         'Іңкәр',
-    );
+    ];
 
     /**
      * @see http://koshpendi.kz/index.php/nomad/imena/
@@ -145,7 +145,7 @@ class Person extends \Faker\Provider\Person
      *
      * @var array
      */
-    protected static $lastName = array(
+    protected static $lastName = [
         'Адырбай',
         'Әжібай',
         'Байбөрі',
@@ -174,7 +174,53 @@ class Person extends \Faker\Provider\Person
         'Шілдебай',
         'Ыстамбақы',
         'Ісмет',
-    );
+    ];
+
+    /**
+     * @see http://www.akorda.kz/ru/legal_acts/decrees/o-perevode-alfavita-kazahskogo-yazyka-s-kirillicy-na-latinskuyu-grafiku
+     *      https://en.wikipedia.org/wiki/Kazakh_alphabets
+     *      https://en.wikipedia.org/wiki/Kazakh_alphabets#cite_note-Decree569-3
+     *
+     * @var array
+     */
+    protected $cyrillicToLatinAlphabetMap = [
+        'а'  => 'a',
+        'ә'  => 'a\'',
+        'б'  => 'b',
+        'д'  => 'd',
+        'е'  => 'e',
+        'ё'  => 'e',
+        'ф'  => 'f',
+        'г'  => 'g',
+        'ғ'  => 'g\'',
+        'х'  => 'h',
+        'һ'  => 'h',
+        'і'  => 'i',
+        'и'  => 'i\'',
+        'й'  => 'i\'',
+        'ж'  => 'j',
+        'к'  => 'k',
+        'л'  => 'l',
+        'м'  => 'm',
+        'н'  => 'n',
+        'ң'  => 'n\'',
+        'нг' => 'n\'',
+        'о'  => 'o',
+        'ө'  => 'o\'',
+        'п'  => 'p',
+        'қ'  => 'q',
+        'р'  => 'r',
+        'с'  => 'c',
+        'ш'  => 's\'',
+        'ч'  => 'c\'',
+        'т'  => 't',
+        'ұ'  => 'u',
+        'ү'  => 'u\'',
+        'в'  => 'v',
+        'ы'  => 'y',
+        'у'  => 'y\'',
+        'з'  => 'z',
+    ];
 
     /**
      * @param  integer $year
@@ -210,13 +256,12 @@ class Person extends \Faker\Provider\Person
         }
 
         $population = mt_rand(1000, 2000);
-        $century    = self::getCenturyByYear((int) $birthDate->format('Y'));
+        $century    = self::getCenturyByYear((int)$birthDate->format('Y'));
+        $iin        = $birthDate->format('ymd');
+        $iin        .= (string)self::$genderCenturyMap[$gender][$century];
+        $iin        .= (string)$population;
 
-        $iin  = $birthDate->format('ymd');
-        $iin .= (string) self::$genderCenturyMap[$gender][$century];
-        $iin .= (string) $population;
-
-        return  $iin . (string) self::checkSum($iin);
+        return $iin . (string)self::checkSum($iin);
     }
 
     /**
@@ -237,7 +282,7 @@ class Person extends \Faker\Provider\Person
 
     /**
      * @param string $iinValue
-     * @param array $sequence
+     * @param array  $sequence
      *
      * @return integer
      */
@@ -246,7 +291,7 @@ class Person extends \Faker\Provider\Person
         $sum = 0;
 
         for ($i = 0; $i <= 10; $i++) {
-            $sum += (int) $iinValue[$i] * $sequence[$i];
+            $sum += (int)$iinValue[$i] * $sequence[$i];
         }
 
         return $sum % 11;
